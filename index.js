@@ -1,7 +1,6 @@
 'use strict'
 
-const _ = require('lodash');
-const robot = require('robotjs');
+const robot = require('robotjs')
 
 const status = {
   statusList: [
@@ -13,29 +12,29 @@ const status = {
     'end3'
   ],
   latest: 'start',
-  get current() {
-    return this.latest;
+  get current () {
+    return this.latest
   },
-  next() {
-    let currentIndex = this.statusList.findIndex(item => item === this.latest);
-    if (currentIndex === this.statusList.length - 1) currentIndex = 0;
-    this.latest = this.statusList[currentIndex + 1];
-    return true;
+  next () {
+    let currentIndex = this.statusList.findIndex(item => item === this.latest)
+    if (currentIndex === this.statusList.length - 1) currentIndex = 0
+    this.latest = this.statusList[currentIndex + 1]
+    return true
   }
-};
-
-console.log(status.current);
-for (let index = 0; index < 10; index++) {
-  status.next();
-  console.log(status.current);
 }
 
-robot.setMouseDelay(2);
+console.log(status.current)
+for (let index = 0; index < 10; index++) {
+  status.next()
+  console.log(status.current)
+}
+
+robot.setMouseDelay(2)
 
 // 1. 點擊任務
-if (status.current = status.statusList[0]) {
-  
-}
+// if (status.current = status.statusList[0]) {
+
+// }
 
 // 2. 點擊單人狩獵
 // 3. 點擊準備完成
