@@ -1,6 +1,7 @@
 'use strict'
 
 const robot = require('robotjs')
+const Jimp = require('jimp')
 
 const status = {
   statusList: [
@@ -24,22 +25,33 @@ const status = {
 }
 
 console.log(status.current)
-for (let index = 0; index < 10; index++) {
-  status.next()
-  console.log(status.current)
+
+function getScreenCapture () {
+  const screenSize = robot.getScreenSize()
+  const width = screenSize.width
+  const height = screenSize.height
+
+  const captureImage = robot.screen.capture(0, 0, width, height).image
+  // console.log(captureImage)
+
+  // fs.writeFile('./screen.png', captureImage.image.toString('base64'), 'base64', (err) => {
+  //   console.log(err);
+  // });
+  const jimpImage = new Jimp({ data: captureImage, width, height }, (err, image) => {
+    if (err) console.log(err)
+    console.log(image)
+
+    // image.write('screen.png');
+  })
+  console.log(jimpImage)
+
+  // const encodeImg = cv.imdecode(captureImage.image)
+  // cv.imshow('screen', encodeImg)
+  // cv.waitKey()
+
+  // Support for higher density screens.
+  // const multi = img.width / size;
+  // Get color at 2, 3.
+  // const color = img.colorAt(2 * multi, 3 * multi);
 }
-
-robot.setMouseDelay(2)
-
-// 1. 點擊任務
-// if (status.current = status.statusList[0]) {
-
-// }
-
-// 2. 點擊單人狩獵
-// 3. 點擊準備完成
-// 4. 點擊出發
-// 5. 偵測是否結束
-// 6. 點擊確定
-// 7. 點擊確定
-// 8. 點擊OK
+getScreenCapture()
